@@ -67,6 +67,7 @@ Add rows to table
 -- In SQL different lines need to be separated by a semicolon ";"
 -- You write system commands in capital letters to easily distinguish
 -- column names from system commands
+--INSERT INTO table column(first column, second column, third column, the number of victories) and then have to use semi colon
 
 INSERT INTO drivers  VALUES (1, 'Lewis Hamilton','British',103);
 
@@ -99,6 +100,8 @@ Try it yourself!
 -- Select a new driver id (needs to be unique)
 -- Make sure to deparate arguments by a semicolon!
 
+INSERT INTO drivers VALUES (5, 'Max Verstappen', 'Netherlands', 51);
+INSERT INTO drivers VALUES (6, 'Juan Pablo Montoya', 'Columbian', 6);
 
 
 -- SQLBook: Markup
@@ -176,6 +179,9 @@ ORDER BY victories DESC;
 -- The following code would NOT work because we used double quotations
 -- "Double quotations" are used to refer to column names
 SELECT * FROM drivers
+WHERE nationality = "German";
+
+SELECT * FROM drivers
 WHERE nationality = 'German';
 -- SQLBook: Markup
 <font size = "5">
@@ -187,7 +193,8 @@ with more than 60 victories
 -- SQLBook: Code
 -- Write your own code!
 
-
+SELECT nationality, driver_id FROM drivers
+WHERE victories>=60;
 
 -- SQLBook: Markup
 # <span style="color:darkblue"> III. Groupby + Chaining </span>
@@ -198,12 +205,39 @@ Groupby + Aggregate
 -- SQLBook: Code
 -- This command computes summary statistics by nationalitySELECT COUNT(*) AS num_rows,
 -- Including "nationality" (the grouping column) is optional in the select
+-- can do it without nationality but would not be able to see the group names
 SELECT nationality,
        SUM(victories) AS sum_victories,
        AVG(victories) AS mean_victories,
        MIN(victories) AS min_victories,
        MAX(victories) AS max_victories
 FROM drivers
+GROUP BY nationality;
+
+SELECT 
+       SUM(victories) AS sum_victories,
+       AVG(victories) AS mean_victories,
+       MIN(victories) AS min_victories,
+       MAX(victories) AS max_victories
+FROM drivers
+GROUP BY nationality;
+
+SELECT nationality,
+       SUM(victories) AS sum_victories,
+       AVG(victories) AS mean_victories,
+       MIN(victories) AS min_victories,
+       MAX(victories) AS max_victories
+FROM drivers
+GROUP BY nationality
+HAVING SUM(victories)>50;
+
+SELECT nationality,
+       SUM(victories) AS sum_victories,
+       AVG(victories) AS mean_victories,
+       MIN(victories) AS min_victories,
+       MAX(victories) AS max_victories
+FROM drivers
+WHERE nationality= 'German'
 GROUP BY nationality;
 -- SQLBook: Markup
 <font size = "5">
@@ -264,6 +298,7 @@ $\qquad \qquad \qquad \qquad \ $```GROUP BY```<br>
 -- Include comments with two dashes "--"
 -- Arguments in parenthesis, separated by a comma ","
 -- For strings, use single quotations '...', not double "...".
+
 -- SQLBook: Markup
 <font size="5"> 
 
