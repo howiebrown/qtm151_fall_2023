@@ -229,6 +229,8 @@ AND schema1.table1.key1_3 = schema2.table2.key2_3;
 -- Active: 1698674191041@@127.0.0.1@5432@us_congress
 -- Write your own code
 
+-- SQLBook: Code
+CREATE DATABASE formula1
 -- SQLBook: Markup
 # <span style="color:darkblue"> IV. (Optional) Additional Resources </span>
 
