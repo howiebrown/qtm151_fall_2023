@@ -13,8 +13,9 @@ Add a comment with your Emory ID below
 
 (a) Create a new SQL database called formula1
 -- SQLBook: Code
+-- Active: 1698696871949@@127.0.0.1@5432@formula1
 -- Write your own code
-
+CREATE DATABASE formula1
 -- SQLBook: Markup
 
 <font size = "5">
@@ -70,7 +71,9 @@ Hints:
 - In SQL use single quotes for logical conditions with strings '...'
 -- SQLBook: Code
 -- Write your own code
-
+SELECT * FROM drivers
+WHERE nationality = 'American'
+ORDER BY surname ASC;
 -- SQLBook: Markup
 <font size = "5">
 
@@ -85,8 +88,9 @@ HINT: See the lecture 17 for details<br>
 HINT: Include "driverId" in quotations since it has a mix of <br>
 upper case and lower case letters
 -- SQLBook: Code
+-- Active: 1698696871949@@127.0.0.1@5432@formula1
 -- Write your own code
-
+SELECT COUNT(DISTINCT "driverId") FROM drivers;
 -- SQLBook: Markup
 <font size = "5">
 
@@ -102,6 +106,12 @@ HINT: Include "driverId" in quotations since it has a mix of <br>
 upper case and lower case letters
 -- SQLBook: Code
 -- Write your own code
+
+SELECT "driverid",
+AVG(milliseconds) as avg_milliseconds
+FROM lap_times
+GROUP BY "driverid"
+ORDER BY avg_milliseconds
 
 -- SQLBook: Markup
 <font size = "5">
@@ -119,3 +129,7 @@ HINT: Include "driverId" in quotations since it has a mix of <br>
 upper case and lower case letters
 -- SQLBook: Code
 -- Write your own code
+SELECT * 
+FROM lap_times
+LEFT JOIN drivers
+ON lap_times."driverId"  = drivers."driverId";
